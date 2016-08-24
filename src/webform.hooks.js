@@ -54,9 +54,9 @@ function webform_entity_post_render_content(entity, entity_type, bundle) {
             })
         });
     }
-    else {
-      console.log('webform was undefined for ' + bundle + ' ' + entity.nid);
-    }
+    // else {
+    //   console.log('webform was undefined for ' + bundle + ' ' + entity.nid);
+    // }
   }
   catch (error) {
     console.log('webform_entity_post_render_content - ' + error);
@@ -88,6 +88,9 @@ function webform_services_preprocess(options) {
  */
 function webform_services_postprocess(options, result) {
   try {
+    //@NOTE - not needed at them moment
+    return;
+
     if (options.service == 'webform' && options.resource == 'submissions') {
 
       //console.log('webform_services_postprocess', result);

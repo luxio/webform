@@ -54,12 +54,16 @@ function webform_form(form, form_state, entity, entity_type, bundle) {
         form.elements[component.form_key] = {
           component: component,
           type: component.type,
-          title: '',
+          prefix: '<div class="webform-component-type-' +  component.type + '">',
+          suffix: '</div>',
+          title: title,
           required: required,
           value: webform_tokens_replace(component.value),
-          description: (component.extra.description_above) ? '' : webform_tokens_replace(component.extra.description),
-          prefix: theme('form_element_label', {'element': {'title': title}}) +
-            '<div class="description">' + webform_tokens_replace(component.extra.description) + '</div>',
+          description: '', // description is set in cutom theme function theme_form_element_label
+          //description: (component.extra.description_above) ? '' : webform_tokens_replace(component.extra.description),
+          // prefix: '<div class="ll-webform-prefix">' + theme('form_element_label', {'element': {'title': title}}) +
+          //   '<div class="description">' + webform_tokens_replace(component.extra.description) + '</div>',
+          // suffix: '</div>',
           disabled: component.extra.disabled,
           access: access,
           options: {
@@ -70,7 +74,11 @@ function webform_form(form, form_state, entity, entity_type, bundle) {
           children: [],
           weight: parseInt(component.weight) // Not working...
         };
-        
+
+        // var label =  theme('form_element_label', form.elements[component.form_key]);
+        // form.elements[component.form_key]['prefix'] = '<div class="ll-webform-prefix">' + '<div class="ll-show-label">' + label + '</div>' + '<div class="description">' + webform_tokens_replace(component.extra.description) + '</div>';
+        // form.elements[component.form_key]['suffix'] = '</div>';
+
         // Some component types map cleanly, others do not. For those that don't
         // send them off to the component widget form handler.
         var function_name = 'webform_component_' + component.type + '_widget_form';
